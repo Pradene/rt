@@ -1,4 +1,4 @@
-#include "../../includes/parsing.h"
+#include "../../includes/minirt.h"
 
 t_obj_type  check_obj_type(char *type)
 {
@@ -16,6 +16,13 @@ t_obj_type  check_obj_type(char *type)
     return (ERROR);
 }
 
+int check_ambient_light(t_alight light)
+{
+    if (!check_color(light.color) || !check_brightness(light.brightness))
+        return (0);
+    return (1);
+}
+
 int ambient_light(char **args)
 {
     t_data  *data;
@@ -31,6 +38,15 @@ int ambient_light(char **args)
         return (0);
     data->alight.color = strtov3(args[2]);
     data->alight.created = 1;
+    if (!check_ambient_light(data->alight))
+        return (0);
+    return (1);
+}
+
+int check_camera(t_camera camera)
+{
+    if (!check_fov(camera.fov) || !check_direction(camera.direction))
+        return (0);
     return (1);
 }
 
@@ -48,6 +64,15 @@ int camera(char **args)
     data->camera.direction = strtov3(args[2]);
     data->camera.fov = (int)strtofloat(args[3], &tmp);
     data->camera.created = 1;
+    if (!check_camera(data->camera))
+        return (0);
+    return (1);
+}
+
+int check_light(t_light light)
+{
+    if (!check_color(light.color) || !check_brightness(light.brightness))
+        return (0);
     return (1);
 }
 
@@ -65,6 +90,8 @@ int light(char **args)
     data->light.brightness = strtofloat(args[2], &tmp);
     data->light.color = strtov3(args[3]);
     data->light.created = 1;
+    if (!check_light(data->light))
+        return (0);
     return (1);
 }
 
@@ -150,7 +177,7 @@ int create_obj(char *line)
         return (0);
     args = ft_split(line, ' ');
     if (!args)
-        return (1);
+        return (0);
     if (!args[0])
         return (free_string_array(args), 1);
     type = check_obj_type(args[0]);

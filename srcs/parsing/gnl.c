@@ -1,4 +1,4 @@
-#include "../../includes/parsing.h"
+#include "../../includes/minirt.h"
 
 #define BUFFER_SIZE 128
 

@@ -1,4 +1,4 @@
-#include "../../includes/parsing.h"
+#include "../../includes/minirt.h"
 
 float   strtofloat(char *s, char **end)
 {

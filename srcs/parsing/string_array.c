@@ -1,4 +1,4 @@
-#include "../../includes/parsing.h"
+#include "../../includes/minirt.h"
 
 int     string_array_size(char **sa)
 {

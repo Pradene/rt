@@ -1,4 +1,4 @@
-#include "../../includes/parsing.h"
+#include "../../includes/minirt.h"
 
 v3  strtov3(char *s)
 {

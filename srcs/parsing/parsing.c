@@ -1,4 +1,4 @@
-#include "../../includes/parsing.h"
+#include "../../includes/minirt.h"
 
 char    **read_file(int fd)
 {
@@ -43,8 +43,9 @@ void    parsing(char *pathname)
         return ;
     }
     file = read_file(fd);
-    print_string_array(file);
+    // print_string_array(file);
     create_objs(file);
     free_string_array(file);
+    print_objects();
     close(fd);
 }

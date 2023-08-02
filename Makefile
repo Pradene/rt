@@ -1,4 +1,5 @@
 FILES	= parsing/check_file_extension.c \
+		parsing/check_objects.c \
 		parsing/create_objs.c \
 		parsing/gnl.c \
 		parsing/objects.c \

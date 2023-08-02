@@ -2,6 +2,8 @@
 # define PARSING_H
 
 # include "../libft/libft.h"
+# include "../mlx_linux/mlx.h"
+# include "../mlx_linux/mlx_int.h"
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -14,14 +16,20 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 
+
+# define HEIGHT 800
+# define WIDTH 1200
+# define PI 3.14159265359
+# define ASPECT_RATIO (float)WIDTH / (float)HEIGHT
+
 typedef float v3 __attribute__((ext_vector_type(3)));
 
 typedef enum    e_obj_type
 {
     ERROR,
-    LIGHT,
-    CAMERA,
     AMBIENT_LIGHT,
+    CAMERA,
+    LIGHT,
     SPHERE,
     PLANE,
     CYLINDER
@@ -67,20 +75,38 @@ typedef struct  s_alight
     float   brightness;
 }   t_alight;
 
+typedef struct s_image
+{
+	void	*image;
+	char	*data;
+	int		bpp;
+	int		size_line;
+	int		endian;
+}	t_image;
+
 typedef struct  s_data
 {
     t_obj_list  *objects;
     t_camera    camera;
     t_light     light;
     t_alight    alight;
+    void        *id;
+    void        *win;
+    t_image     img;
 }   t_data;
 
 t_data  *get_data();
 
 char    *gnl(int fd);
 
+int     check_color(v3 color);
+int     check_brightness(float brightness);
+int     check_fov(int fov);
+int     check_direction(v3 direction);
+
 void    free_objects(t_obj_list **lst);
 void    add_objects(t_obj_list **lst, t_obj_list *new);
+void    print_objects(void);
 
 int     string_array_size(char **sa);
 void    print_string_array(char **sa);
