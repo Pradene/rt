@@ -10,6 +10,11 @@
 
 # include <string.h>
 
+# include <math.h>
+
+# include <limits.h>
+# include <float.h>
+
 # include <ctype.h>
 
 # include <unistd.h>
@@ -51,6 +56,12 @@ typedef struct  s_obj_list
     t_obj               object;
     struct s_obj_list   *next;
 }   t_obj_list;
+
+typedef struct  s_ray
+{
+    v3  position;
+    v3  direction;
+}   t_ray;
 
 typedef struct  s_camera
 {
@@ -96,6 +107,9 @@ typedef struct  s_data
 }   t_data;
 
 t_data  *get_data();
+int     free_data();
+
+// PARSING
 
 char    *gnl(int fd);
 
@@ -122,5 +136,29 @@ int     check_file_extension(char *path, char *extension);
 void    create_objs(char **sa);
 
 void    parsing(char *path);
+
+
+// MATHS
+
+float   max(float n0, float n1);
+float   min(float n0, float n1);
+
+
+float   clamp(float v, float min, float max);
+float   dot(v3 p, v3 q);
+v3      normalize(v3 vec);
+float   radian(float angle);
+
+
+// RENDER
+
+int     rgba_to_color(float r, float g, float b, float a);
+
+int	    key(int key, t_data *data);
+
+int     intersect(t_ray ray);
+
+void    render(void);
+void    renderer(char *name);
 
 #endif

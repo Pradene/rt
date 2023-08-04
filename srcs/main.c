@@ -18,7 +18,7 @@ void    data_initialisation()
     data->alight.created = 0;
 }
 
-void    free_data()
+int free_data()
 {
     t_data  *data;
 
@@ -32,23 +32,7 @@ void    free_data()
         mlx_destroy_display(data->id);
     free(data->id);
     exit(EXIT_SUCCESS);
-}
-
-void    renderer(char *name)
-{
-    t_data  *data;
-
-    data = get_data();
-    data->win = NULL;
-    data->img.image = NULL;
-    data->img.data = NULL;
-    data->id = mlx_init();
-    if (!data->id)
-        free_data();
-    data->win = mlx_new_window(data->id, WIDTH, HEIGHT, name);
-    data->img.image = mlx_new_image(data->id, WIDTH, HEIGHT);
-    data->img.data = mlx_get_data_addr(data->img.image, &data->img.bpp,
-        &data->img.size_line, &data->img.endian);
+    return (0);
 }
 
 int main(int ac, char **av)
@@ -58,6 +42,7 @@ int main(int ac, char **av)
     data_initialisation();
     parsing(av[1]);
     renderer("miniRT");
+    render();
     free_data();
     return (0);
 }

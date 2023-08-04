@@ -7,6 +7,15 @@ FILES	= parsing/check_file_extension.c \
 		parsing/string_array.c \
 		parsing/strtof.c \
 		parsing/strtov3.c \
+		raytracing/clamp.c \
+		raytracing/color.c \
+		raytracing/event.c \
+		raytracing/intersect.c \
+		raytracing/radian.c \
+		raytracing/render.c \
+		raytracing/renderer.c \
+		raytracing/utils.c \
+		raytracing/vec.c \
 		main.c
 
 SRCS	= $(addprefix srcs/, $(FILES))
